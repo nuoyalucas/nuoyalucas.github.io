@@ -19,7 +19,7 @@
 |      |--chick_pretty.mp3
 |
 |--css
-|   |--index.css
+|  |--index.css
 |
 |--js
    |--index.js
