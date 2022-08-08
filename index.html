@@ -3,9 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--         <link rel="stylesheet" href="/jquery/jquery_mobile.min.css">
-        <script src="/jquery/jquery.js"></script>
-        <script src="/jquery/jquery_mobile.js"></script> -->
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="shortcut icon" href="/logo.ico">
         <style>
@@ -15,15 +12,19 @@
                 background-color:grey;
                 color:white;
             }
+            #welcome {
+                position:absolute;
+                transform:translate(-50%,-50%);
+            }
         </style>
         <title>NuoyaLucas的个人站点</title>
     </head>
     <body>
         <div id="title">
-          <h1>欢迎来到NuoyaLucas的个人站点</h1>
+          <h1 id="welcome">欢迎来到NuoyaLucas的个人站点</h1>
         </div>
           <div id="content">
-            <h3> 以下是该站点的各大项目：</h3>
+            <h2> 以下是该站点的各大项目：</h2>
                 <ul>
                     <li><a href="/kunkun">坤坤音游</a></li>
                     <li><a href="/command_broswer">命令行浏览器(该项目处于开发中，敬请期待)</a></li>
