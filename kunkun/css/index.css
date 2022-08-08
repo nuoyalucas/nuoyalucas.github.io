@@ -1,0 +1,31 @@
+div#game{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+ 
+ul li{
+    list-style: none;
+}
+ 
+img {
+    width: 100px;
+    height: 100px;
+}
+ 
+.square{
+    border: 1px solid black;
+}
+ 
+body{
+    /*上级目录的照片*/
+    background: url(../src/img/chick.jpg);
+    background-attachment:fixed;
+    background-size: 100% 100%;
+}
+ 
+#input{
+    /*白色显眼*/
+    color: white;
+}

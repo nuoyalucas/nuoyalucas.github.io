@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>只因你太美</title>
+        <link rel="shortcut icon" href="src/img/logo.ico">
+        <link rel="stylesheet" href="css/index.css">
+        <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    </head>
+    <body>
+        <div id="game">
+            <H1>{{ head_text }}</H1>
+            <div v-if="if_not_start" id="input">
+                请输入挑战时间(默认为20,输入-1无限循环):<input type="text" value="20" id="time">
+            </div>
+            <div id="square">
+                <ul v-if="!if_not_start">
+                    <li v-for="list,index_1 in square_list">
+                        <div class="img">
+                            <a v-for="img,index_2 in list">
+                                <img :src="img" :id="String(index_1)+String(index_2)" class="square" @click="click_img(String(index_1)+String(index_2))"/>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <h2 v-if="show_text" v-text="text" style="text-align: center;"></h2>
+            <div><h3 id="text" style="text-align: center;"></h3></div>
+            <div id="btn"></div>
+            <br>
+            <div id="start_and_quit" v-if="if_not_start">
+                <button id="start" @click="start_game()">开始挑战</button>
+                <button id="quit" @click="quit_game()" style="position:absolute;right:0;">退出游戏</button>
+            </div>
+        </div>
+        <script src="js/index.js"></script>
+    </body>
+</html>
