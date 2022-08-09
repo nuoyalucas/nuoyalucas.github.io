@@ -15,7 +15,7 @@ textarea.addEventListener("keyup",(event) => {
 	}
 	else {
     	let input = textarea.value.split("\n");
-    	let detailInput = /\d{4}-\d-\d \d{1,2}:\d{1,2} >(.*)/.exec(input[input.length-2])[1];
+    	let detailInput = /\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2} >(.*)/.exec(input[input.length-2])[1];
    		let parm = detailInput.split(" ");
         pauseCommand(parm);
 	}
@@ -47,12 +47,13 @@ function pauseCommand(parm) {
     		    	textarea.value += `Where do you want to go?\n`;
     		    }
     		    else {
-    		    	if (/^https?:\/\/.*/.test(parm[1])) {
-    		    		window.open(parm[1]);
-    		    	}
-    		    	else {
-    		    		textarea.value += `RL is not complete!\n`;
-    		    	}
+//     		    	if (/^https?:\/\/.*/.test(parm[1])) {
+//     		    		window.open(parm[1]);
+//     		    	}
+//     		    	else {
+//     		    		textarea.value += `URL is not complete!\n`;
+//     		    	}
+			window.open(parm[1]);
     		    }
     		    break;
     	    }
