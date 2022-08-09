@@ -1,12 +1,17 @@
 var textarea = document.getElementById("text");
+
+//指令及说明
 var commands = {
 	"bg":"a command that can show the background's image and set the background's image",
     "goto":"a command that can open a url",
     "command":"a command that can show the commands' detail",
     "history":"a command that can show all the commands that be used",
-    "search":"a command that can search some thing on an appointed search engine"
+    "search":"a command that can search some thing on an appointed search engine",
+    "download":"a command that can download a file"
 }
 
+//存放历史指令
+var historyCommands = new Array();
 
 textarea.value += "Welcome to NuoyaLucas's command broswer.You can type 'command all' to show all the commands.\n\n"
 textarea.addEventListener("keyup",(event) => {
@@ -14,15 +19,17 @@ textarea.addEventListener("keyup",(event) => {
 		return;
 	}
 	else {
+		//获取指令及参数
     	let input = textarea.value.split("\n");
-    	let detailInput = /\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2} > (.*)/.exec(input[input.length-2])[1];
-   		let parm = detailInput.split(" ");
-        pauseCommand(parm);
+    	let detailInput = /(\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}) >\s?(.*)/.exec(input[input.length-2]);
+   		let parm = detailInput[2].split(" ");
+   		let time = detailInput[1]
+        pauseCommand(parm,time);
 	}
 });
 
 //解析指令
-function pauseCommand(parm) {
+function pauseCommand(parm,time) {
 	if (parm[0] === "") {
 		return;
 	}
@@ -64,9 +71,11 @@ function pauseCommand(parm) {
                 else {
                     switch (parm[1]) {
                         case "all": {
+                        	textarea.value += "----------------------------------------------------------------------------------------------------\n";
                             for (let detail in commands) {
                                 textarea.value += `Command '${detail}': ${commands[detail]}\n`;
                             }
+                            textarea.value += "----------------------------------------------------------------------------------------------------\n";
                             break;
                         }
                         default:
@@ -78,7 +87,17 @@ function pauseCommand(parm) {
                 }
                 break;
             }
+            //history指令
+            case "history":{
+            	textarea.value += "----------------------------------------------------------------------------------------------------\n";
+            	for (var index=0;index<historyCommands.length;index++) {
+            		textarea.value += historyCommands[index]+"\n";
+            	}
+            	textarea.value += "----------------------------------------------------------------------------------------------------\n";
+                break;
+            }
     	}
+    	historyCommands.push(time+" : "+parm);
     }
 }
 
@@ -94,6 +113,8 @@ var newDate = function(){
 	textarea.value += curDay;
 };
 newDate();
+
+//换行就显示时间
 textarea.addEventListener("keyup",(event) => {
 	if (event.keyCode == 13) {
 		newDate();
