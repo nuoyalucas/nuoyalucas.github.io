@@ -13,7 +13,8 @@ var commands = {
 //存放历史指令
 var historyCommands = new Array();
 
-textarea.value += "Welcome to NuoyaLucas's command browser.You can type 'command all' to show all the commands.\n\n"
+textarea.value += "Welcome to NuoyaLucas's command browser.You can type 'command all' to show all the commands.\n\n";
+
 textarea.addEventListener("keyup",(event) => {
 	if (event.keyCode !== 13) {
 		return;
@@ -22,7 +23,12 @@ textarea.addEventListener("keyup",(event) => {
 		//获取指令及参数
     	let input = textarea.value.split("\n");
     	let detailInput = /(\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}) >\s?(.*)/.exec(input[input.length-2]);
-   		let parm = detailInput[2].split(" ");
+    	let oldParm = detailInput[2].replace(/\s+/," ");
+    	//将不必要的内容删掉
+    	oldParm = oldParm.replace(/^\s+/,"");
+    	oldParm = oldParm.replace(/;?$/,"");
+    	oldParm = oldParm.replace(/\s+$/,"");
+   		let parm = oldParm.split(" ");
    		let time = detailInput[1]
         pauseCommand(parm,time);
 	}
@@ -125,6 +131,41 @@ function pauseCommand(parm,time) {
                 }
                 break;
             }
+            //search指令
+            case "search": {
+            	if (parm.length === 1) {
+            		text.value += "What do you want to search?\n";
+            		break;
+            	}
+            	else if (parm.length === 2) {
+            		text.value += "You should choose a search engine in baidu,bing,github,zhihu,360\n";
+            		break;
+            	}
+            	else {
+            		switch(parm[2]) {
+            			//百度
+            			case "baidu":
+            			    window.open(`https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=${parm[1]}&fenlei=256&rsv_pq=c176b9c70007eddf&rsv_t=68ceV2Ge1OT5bG4LEwNcettA7VdjvkuX8SUZPzR4fH%2BEKWsiBgBnuchEUhJ0&rqlang=en&rsv_dl=tb&rsv_enter=1&rsv_sug3=3&rsv_sug1=3&rsv_sug7=101&rsv_sug2=0&rsv_btype=i&prefixsug=a&rsp=4&inputT=1517&rsv_sug4=1517`)
+            			    break;
+            			//必应
+            			case "bing":
+            			    window.open(`https://cn.bing.com/search?q=${parm[1]}&form=QBLH&sp=-1&pq=kj&sc=10-2&qs=n&sk=&cvid=992337B72AE64ED388545F828CA64C3F&ghsh=0&ghacc=0&ghpl=`);
+            			    break;
+            			//github
+            			case "github":
+            			    window.open(`https://github.com/search?q=${parm[1]}`);
+            			    break;
+            			//知乎
+            			case "zhihu":
+            			    window.open(`https://www.zhihu.com/search?q=${parm[1]}&utm_content=search_hot&type=content`);
+            			    break;
+            			//360
+            			case "360":
+            			    window.open(`https://www.so.com/s?ie=utf-8&fr=so.com&src=home_so.com&ssid=&nlpv=basezt&q=${parm[1]}`);
+            			    break;
+            		}
+            	}
+            }
     	}
     	//将指令加入历史指令中
     	if (parm[1] !== "clear") {
@@ -156,4 +197,22 @@ textarea.addEventListener("keyup",(event) => {
 		newDate();
 	}
 });
-	
+
+//获取鼠标行数
+function getMousePos() {
+	let pos = textarea.selectionStart;
+	let value = textarea.value;
+	let lines = value.split("\n");
+	let char = 0;
+	for (var x=1;x<lines.length+1;x++) {
+		for (var y=0;y<lines[x-1].length;y++) {
+			if (char !== pos) {
+				char++;
+			}
+			else {
+				console.log(x)
+				return x;
+			}
+		}
+	}
+}
