@@ -15,7 +15,7 @@ textarea.addEventListener("keyup",(event) => {
 	}
 	else {
     	let input = textarea.value.split("\n");
-    	let detailInput = /\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2} >(.*)/.exec(input[input.length-2])[1];
+    	let detailInput = /\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2} > (.*)/.exec(input[input.length-2])[1];
    		let parm = detailInput.split(" ");
         pauseCommand(parm);
 	}
@@ -90,7 +90,7 @@ var newDate = function(){
 	let D = myDate.getDate();
 	let H = myDate.getHours();
 	let Mi = myDate.getMinutes();
-	let curDay = Y + '-'+ Mo + '-' + D +" " + H + ":" + Mi +" >";
+	let curDay = Y + '-'+ Mo + '-' + D +" " + H + ":" + Mi +" > ";
 	textarea.value += curDay;
 };
 newDate();
