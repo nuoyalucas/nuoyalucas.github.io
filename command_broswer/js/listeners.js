@@ -62,13 +62,6 @@ function pauseCommand(parm) {
                     textarea.value += `Please add a parameter !\n`;
                 }
                 else {
-                    if (!(parm[1] in commands)) {
-                        if (parm[1] == "all") {}
-                        else {
-                            textarea.value += `Command not found: ${parm[1]}\n`;
-                            break;
-                        }
-                    }
                     switch (parm[1]) {
                         case "all": {
                             for (let detail in commands) {
@@ -76,8 +69,11 @@ function pauseCommand(parm) {
                             }
                             break;
                         }
-			default:
-			    textarea.value += `Command '${parm[1]}': ${commands[parm[1]]}\n`;
+                        default:
+                            for (var x=1;x < parm.length;x++) {
+                                textarea.value += (parm[x] in commands) ? `Command '${parm[x]}': ${commands[parm[x]]}\n` : `command not found: ${parm[x]}\n`;
+                            }
+                            break;
                     }
                 }
                 break;
