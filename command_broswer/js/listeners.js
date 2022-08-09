@@ -47,13 +47,13 @@ function pauseCommand(parm) {
     		    	textarea.value += `Where do you want to go?\n`;
     		    }
     		    else {
-//     		    	if (/^https?:\/\/.*/.test(parm[1])) {
-//     		    		window.open(parm[1]);
-//     		    	}
-//     		    	else {
-//     		    		textarea.value += `URL is not complete!\n`;
-//     		    	}
-			window.open(parm[1]);
+    		    	if (/^https?:\/\/.*/.test(parm[1])) {
+    		    		window.open(parm[1]);
+    		    	}
+    		    	else {
+    		    		window.open("http"+parm[1]);
+    		    	}
+			//window.open(parm[1]);
     		    }
     		    break;
     	    }
