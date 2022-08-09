@@ -89,15 +89,51 @@ function pauseCommand(parm,time) {
             }
             //history指令
             case "history":{
-            	textarea.value += "----------------------------------------------------------------------------------------------------\n";
-            	for (var index=0;index<historyCommands.length;index++) {
-            		textarea.value += historyCommands[index]+"\n";
+            	//输出函数
+            	function outHistory(len) {
+            		textarea.value += "----------------------------------------------------------------------------------------------------\n";
+	            	for (var index=0;index<len;index++) {
+	            		textarea.value += historyCommands[index]+"\n";
+	            	}
+	            	textarea.value += "----------------------------------------------------------------------------------------------------\n";
             	}
-            	textarea.value += "----------------------------------------------------------------------------------------------------\n";
+            	//没有记录
+            	if (historyCommands.length === 0) {
+            		textarea.value += "There is no history\n";
+            	}
+            	//全部记录
+            	else if (parm.length === 1) {
+	            	outHistory(historyCommands.length);
+                }
+                //清空
+                else if (parm[1] === "clear") {
+                	historyCommands = [];
+                	break;
+                }
+                //部分记录
+                else if (parm[1] === "limit" && Number(parm[2] <= historyCommands.length)) {
+                	outHistory(Number(parm[2]));
+                }
+                //单条记录
+                else if (/\d+/.test(parm[1]) && Number(parm[1] <= historyCommands.length)){
+                	textarea.value += "----------------------------------------------------------------------------------------------------\n";
+                    textarea.value += historyCommands[Number(parm[1])-1]+"\n";
+                    textarea.value += "----------------------------------------------------------------------------------------------------\n";
+                }
+                else {
+                	textarea.value += `command not found: ${parm[1]}\n`;
+                }
                 break;
             }
     	}
-    	historyCommands.push(time+" : "+parm);
+    	//将指令加入历史指令中
+    	if (parm[1] !== "clear") {
+	    	oneHistory = time;
+	    	for (var i=0;i<parm.length;i++) {
+	    		oneHistory += " "+parm[i];
+	    	}
+	    	historyCommands.push(oneHistory);
+	    }
     }
 }
 
