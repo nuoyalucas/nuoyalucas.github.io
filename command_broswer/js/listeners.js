@@ -51,7 +51,7 @@ function pauseCommand(parm) {
     		    		window.open(parm[1]);
     		    	}
     		    	else {
-    		    		window.open("http"+parm[1]);
+    		    		window.open("https"+parm[1]);
     		    	}
 			//window.open(parm[1]);
     		    }
