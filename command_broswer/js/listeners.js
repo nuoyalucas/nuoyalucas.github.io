@@ -51,9 +51,8 @@ function pauseCommand(parm) {
     		    		window.open(parm[1]);
     		    	}
     		    	else {
-    		    		window.open("https"+parm[1]);
+    		    		window.open("https://"+parm[1]);
     		    	}
-			//window.open(parm[1]);
     		    }
     		    break;
     	    }
@@ -77,6 +76,8 @@ function pauseCommand(parm) {
                             }
                             break;
                         }
+			default:
+			    textarea.value += `Command '${parm[1]}': ${commands[parm[1]]}\n`;
                     }
                 }
                 break;
