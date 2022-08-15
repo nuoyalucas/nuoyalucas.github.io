@@ -1,0 +1,20 @@
+{
+    "bg":{
+    "introduce":"a command that can show the background's image and set the background's image"
+    },
+    "goto":{
+        "introduce":"a command that can open a url"
+    },
+    "command":{
+        "introduce":"a command that can show the commands' detail"
+    },
+    "history":{
+        "introduce":"a command that can show all the commands that be used"
+    },
+    "search":{
+        "introduce":"a command that can search some thing on an appointed search engine"
+    },
+    "download":{
+        "introduce":"a command that can download a file"
+    }
+}
