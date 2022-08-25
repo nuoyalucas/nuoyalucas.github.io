@@ -5,7 +5,7 @@ var commands;
 
 //ajax获取json数据
 $.ajax({
-	url:"/js/commands_config.json",
+	url:"./commands_config.json",
 	async:false, //必须同步，否则commands.js读取信息会出错
 	success:(response)=>{
         commands = response;
